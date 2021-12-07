@@ -64,7 +64,7 @@ void List::InsertToTail(const DataType& d)
 
 DataType& List::Deletelast()
 {
-	int i=1;
+	int i = 1;
 	if (isEmpty())
 	{
 		cout << "Стек Пуст";
@@ -73,7 +73,7 @@ DataType& List::Deletelast()
 	else
 	{
 		Node* tmp; Node* tmp2;
-		tmp = head; 
+		tmp = head;
 		tmp2 = tmp->next;
 		if (head->next == nullptr)
 		{
@@ -82,14 +82,15 @@ DataType& List::Deletelast()
 		}
 		else
 		{
-			while (tmp->next != nullptr && i==1)
+			while (tmp->next != nullptr && i == 1)
 			{
 				if (tmp2->next != nullptr)
 				{
 					tmp = tmp->next;
 					tmp2 = tmp2->next;
 				}
-				i = 0;
+				else
+					i = 0;
 			}
 			tmp2 = tmp->next;
 			tmp->next = nullptr;
