@@ -1,48 +1,65 @@
-#include "lib_name.h"
-#include <gtest.h>
+#include <PointLib.h>
+#include "../gtest/gtest.h"
 
-#define EPSILON 0.000001
-
-TEST(test_lib, can_div_test) {
-  // Arrange
-  int x = 10;
-  int y = 2;
-
-  // Act & Assert
-  ASSERT_NO_THROW(division(x, y));
+TEST(Point, can_create_Point)
+{
+	ASSERT_NO_THROW(Point Point_one(5, 3, 0));
 }
 
-TEST(test_lib, can_div_correctly_test) {
-  // Arrange
-  int x = 6;
-  int y = 2;
-
-  // Act
-  int result = division(x, y);
-
-  // Assert
-  int expected_result = 3;
-  EXPECT_EQ(expected_result, result);
+TEST(Point, default_constructor)
+{
+	ASSERT_NO_THROW(Point Point_one);
 }
 
-TEST(test_lib, can_div_correctly_with_remainder_test) {
-  // Arrange
-  int x = 5;
-  int y = 4;
-
-  // Act
-  float result = division(x, y);
-
-  // Assert
-  float expected_result = 1.25;
-  EXPECT_NEAR(expected_result, result, EPSILON);
+TEST(Point, start_end_error)
+{
+	ASSERT_ANY_THROW(Point Point_one(5, 3, 5));
 }
 
-TEST(test_lib, throw_when_try_div_by_zero_test) {
-  // Arrange
-  int x = 10;
-  int y = 0;
+TEST(Point, comparison_1_1)
+{
+	Point Point_one(1,5,1);
+	Point Point_two(-5,4,0);
+	EXPECT_EQ(true, Point_two< Point_one);
+}
+TEST(Point, comparison_1_2)
+{
+	Point Point_one(1, 5, 1);
+	Point Point_two(-5, 4, 0);
+	EXPECT_EQ(false, Point_two > Point_one);
+}
 
-  // Act & Assert
-  ASSERT_ANY_THROW(division(x, y));
+TEST(Point, comparison_2_1)
+{
+	Point Point_one(8, 9, 0);
+	Point Point_two(-5, 0, 1);
+	EXPECT_EQ(true, Point_two > Point_one);
+}
+
+TEST(Point, comparison_2_2)
+{
+	Point Point_one(8, 9, 0);
+	Point Point_two(-5, 0, 1);
+	EXPECT_EQ(false, Point_two < Point_one);
+}
+
+TEST(Point, work_1)
+{
+	Point Point_one(8, 9, 0);
+	Point Point_two(-5, 0, 1);
+	EXPECT_EQ(16, round(Point::Length(Point_one, Point_two)));
+}
+
+TEST(Point, work_2)
+{
+	Point Point_one(8, 9, 1);
+	Point Point_two(-5, 0, 0);
+	EXPECT_EQ(16, round(Point::Length(Point_one, Point_two)));
+}
+
+TEST(Point, not_work)
+{
+	Point Point_one(8, 9, 1);
+	Point Point_two(-5, 0, 1);
+	ASSERT_ANY_THROW(Point::Length(Point_one, Point_two));
 }
