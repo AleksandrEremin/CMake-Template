@@ -13,10 +13,6 @@ public:
 	Stack(DataType* arr, int size);
 	~Stack() {};
 
-
-	Stack(const Stack& v);
-
-
 	void StackPush(const DataType& val);
 	DataType& StackGet();
 	void StackSee();
